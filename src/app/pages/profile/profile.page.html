@@ -1,0 +1,106 @@
+
+<ion-fab vertical="top" horizontal="start" slot="fixed">
+  <ion-fab-button color="warning" (click)="goBack()">
+    <ion-icon name="arrow-back-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+<ion-content [fullscreen]="true">
+
+  <ion-grid class="bg-card">
+    <ion-row style="margin-top: -15px;">
+      <ion-avatar style="margin:15px auto; height: 100px;width: 100px;">
+        <img src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg">
+      </ion-avatar>
+    </ion-row>
+    <ion-row style="margin-top: -15px;">
+      <ion-col>
+        <ion-text color="secondary">
+          <h2 class="head-title-center" *ngIf="user != undefined">{{ user["first_name"]  }} {{ user["last_name"]  }}</h2>
+          <p class="head-subtitle-center" *ngIf="user != undefined">{{ user["email"] }}</p>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-text color="secondary">
+          <ion-card-subtitle class="text-subtitle" *ngIf="user != undefined"><ion-icon style="font-size: 20px;vertical-align: bottom;" name="logo-whatsapp"></ion-icon> {{ user["phone"]  }}</ion-card-subtitle>
+        </ion-text>
+      </ion-col>
+      <ion-col>
+        <ion-text color="secondary">
+          <ion-card-subtitle class="text-subtitle" *ngIf="user != undefined"><ion-icon style="font-size: 20px;vertical-align: bottom;" name="location-outline"></ion-icon> {{ user["address"]  }}</ion-card-subtitle>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list style="text-align:center;margin-top: 20px;">
+    <ion-button shape="round" color="warning" size="default">Edit Profile <ion-icon name="chevron-forward-outline"></ion-icon></ion-button>
+  </ion-list>
+
+  <ion-list style="margin-top: 25px;width: 90%;margin-left: auto;margin-right: auto;">
+    <ion-item>
+      <ion-avatar slot="end">
+        <ion-icon name="document-text-outline"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h3>Mi Historial</h3>
+        <p>Todas las reservas que realizaste</p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-avatar slot="end">
+        <ion-icon name="location-outline"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h3>Recomendá una cancha</h3>
+        <p>Ayuda a que la familia jahuga crezca</p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-avatar slot="end">
+        <ion-icon name="help-circle-outline"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h3>Soporte Técnico</h3>
+        <p>necesitas ayuda? contacta con nuestro excelente soporte tecnico</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+  <!--<ion-card style="width: 90%;margin:10px auto;box-shadow: 0px 0px;">
+    <form #form="ngForm" (ngSubmit)="update(form)" method="post">
+      <ion-item lines="none">
+        <ion-label style="margin-bottom: 10px;font-size: 20px;" position="stacked">Name</ion-label>
+        <ion-input name="fname" required type="text" class="input-simple"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label style="margin-bottom: 10px;font-size: 20px;" position="stacked">Last Name</ion-label>
+        <ion-input ngModel name="last_name" required type="text" class="input-simple"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label style="margin-bottom: 10px;font-size: 20px;" position="stacked">Email</ion-label>
+        <ion-input ngModel name="email" required type="text" class="input-simple"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label style="margin-bottom: 10px;font-size: 20px;" position="stacked">Password</ion-label>
+        <ion-input ngModel name="password" type="password" required class="input-simple"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label style="margin-bottom: 10px;font-size: 20px;" position="stacked">Phone</ion-label>
+        <ion-input ngModel name="phone" required type="text" class="input-simple"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label style="margin-bottom: 10px;font-size: 20px;" position="stacked">Address</ion-label>
+        <ion-input ngModel name="address" required type="text" class="input-simple"></ion-input>
+      </ion-item>
+
+      <ion-list style="text-align:center;margin-top: 10px;">
+        <ion-button type="submit" size="default" mode="ios" color="dark">Save Changes</ion-button>
+      </ion-list>
+    </form>  
+  </ion-card>-->
+
+</ion-content>

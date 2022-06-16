@@ -1,0 +1,32 @@
+.st-tab{
+    font-size: 16px;
+    color: #000;
+}
+
+.tab-selected{
+    color: #ff9800;
+}
+
+ion-tab-button#tab-button-orders:hover {
+    color: #ff9800;
+}
+
+ion-tab-button#tab-button-orders:active {
+    color: #ff9800;
+}
+
+ion-tab-button#tab-button-materials:hover {
+    color: #2d08b4;
+}
+
+ion-tab-button#tab-button-materials:active {
+    color: #2d08b4;
+}
+
+ion-tab-button#tab-button-new-order:hover {
+    color: #088833;
+}
+
+ion-tab-button#tab-button-new-order:active {
+    color: #088833;
+}

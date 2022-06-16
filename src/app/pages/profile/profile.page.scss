@@ -1,0 +1,35 @@
+.input-simple{
+    padding: 0px 10px !important;
+    border: 1px solid #000;
+    border-radius: 15px;
+    border-bottom: solid 2px #464646;
+}
+
+.head-title-center{
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+}
+
+.head-subtitle-center{
+    text-align: center;
+    color: #fff;
+    margin-top: -10px;
+}
+
+.bg-card{
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    background: linear-gradient(180deg, #2dd36f, #32b968, #2da55d);
+    padding: 85px 0px 40px 0px;
+}
+
+.text-subtitle{
+    text-align: center;
+    font-size: 14px;
+    color:#fff;
+}
+
+ion-content{
+    --background: #fff url("https://i.ibb.co/wYkMBBD/bg-exchange.webp") no-repeat center center / cover;
+}

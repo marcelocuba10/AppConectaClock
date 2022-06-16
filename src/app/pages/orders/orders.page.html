@@ -1,0 +1,63 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-menu-button style="font-size: 30px;"></ion-menu-button>
+  </ion-buttons>
+  <ion-title></ion-title>
+</ion-toolbar>
+
+<ion-content [fullscreen]="true">
+  <ion-grid style="border-radius: 20px;">
+    <ion-row>
+      <ion-col size="9">
+        <ion-text color="secondary">
+          <h1 style="margin-left: 17px;color: #000;font-weight: bold;font-size: 30px;">Service Orders</h1>
+        </ion-text>
+      </ion-col>
+      <ion-col size="3">
+        <ion-icon style="font-size: 33px;text-align: center;margin-top: 25px;margin-left: -25px;" name="document-text-outline"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row style="margin-top: -15px;">
+      <ion-text color="secondary">
+        <h4 style="margin-left: 20px;color: #000;font-weight: 800;">Overview</h4>
+      </ion-text>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list>
+
+    <ion-card *ngFor="let order of orders$ | async" class="card-st" (click)="openDetailModal(order)">
+      <ion-card-header style="padding-bottom: 2px;">
+        <ion-card-title style="text-decoration: underline;font-weight: bold;color: #000;">{{ order.title }}</ion-card-title>
+        <ion-grid>
+          <ion-row style="margin-left: -10px;">
+            <ion-col size="5">
+              <ion-text color="secondary">
+                <ion-card-subtitle>{{ order.date | date:'short'}}</ion-card-subtitle>
+              </ion-text>
+            </ion-col>
+            <ion-col size="4">
+              <!--<ng-container *ngFor="let user of users">
+                  <ion-card-subtitle class="ion-text-center" *ngIf="order.userId === user.id">{{ user.name }}</ion-card-subtitle>
+                  <ion-card-subtitle class="ion-text-center" *ngIf="order.userId !== user.id">Marcos Torres</ion-card-subtitle>
+              </ng-container>-->
+              <ion-card-subtitle class="ion-text-center" *ngIf="user">{{ user["first_name"]  }} {{ user["last_name"]  }}</ion-card-subtitle>
+              <ion-card-subtitle class="ion-text-center" *ngIf="!user">User loading</ion-card-subtitle>
+            </ion-col>
+            <ion-col size="3" style="text-align: end;">
+                <ng-container *ngFor="let category of categories">
+                    <ion-badge style="margin-top: -4px;margin-right: -13px;" *ngIf="order.categoryId === category.id">{{ category.name }}</ion-badge>
+                </ng-container>
+                <ion-badge style="margin-right: -13px;" color="warning">{{ order.status }}</ion-badge>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+      <ion-card-content>
+        {{ order.description }}
+      </ion-card-content>
+    </ion-card>
+
+  </ion-list>
+
+</ion-content>

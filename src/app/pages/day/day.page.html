@@ -1,0 +1,37 @@
+
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-menu-button class="icon-menu"></ion-menu-button>
+  </ion-buttons>
+  <ion-title class="ion-text-center"></ion-title>
+</ion-toolbar>
+
+<ion-content>
+      <ion-grid style="border-radius: 20px;">
+        <ion-row>
+          <ion-col>
+            <ion-text color="secondary">
+              <h1 style="margin-left: 20px;font-family: system-ui;color: #000;font-weight: 800;">Selecciona el día</h1>
+            </ion-text>
+          </ion-col>
+          <ion-col>
+            <ion-icon style="margin-top: 6vw;font-size: 10vw;" name="calendar-outline"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid> 
+
+      <ion-list>
+        <ion-card class="card-color-day" *ngFor="let day of days_selected"  (click)="addBooking(day)">
+          <ion-card-header>
+            <ion-card-title>{{ day }}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-list>
+
+      <ion-fab [routerLink]="['../home']" vertical="bottom" horizontal="center" slot="fixed">
+        <ion-fab-button color="dark">
+          <ion-icon name="arrow-back-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+
+</ion-content>

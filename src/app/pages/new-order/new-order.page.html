@@ -1,0 +1,73 @@
+<div *ngIf="isEditMode">
+  <ion-fab vertical="top" horizontal="start" slot="fixed">
+    <ion-fab-button color="dark" (click)="closeModal()" >
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</div>
+<div *ngIf="!isEditMode">
+  <ion-fab vertical="top" horizontal="start" slot="fixed">
+    <ion-fab-button color="dark" [routerLink]="['/tabs/orders']" >
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</div>
+
+<ion-content>
+  <ion-grid style="border-radius: 20px;margin-top:55px;">
+    <ion-row>
+      <ion-col size="9">
+        <ion-text color="secondary">
+          <h1 class="head-title">{{ isEditMode ? 'Update' : 'Create' }} Order of Service</h1>
+        </ion-text>
+      </ion-col>
+      <ion-col size="3">
+        <ion-icon class="head-icon" name="document-text-outline"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+<form [formGroup]="form" method="post">
+  <ion-card style="width: 90%;margin:10px auto;box-shadow: 0px 0px;">
+    <ion-item lines="none">
+      <ion-label style="margin-bottom: 10px;font-size: 20px;" position="stacked">Service title:</ion-label>
+      <ion-input type="text" formControlName="title" [formControl]="form.controls['title']" class="input-simple"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label style="margin-bottom: 10px;font-size: 20px;" position="stacked">Describe the service or issue:</ion-label>
+      <ion-textarea rows="5" type="text" formControlName="description" class="input-simple"></ion-textarea>
+    </ion-item>
+    <ion-item *ngIf="this.order" mode="ios" lines="none" class="item-select-st">
+      <ion-label style="font-size: 15px;margin-bottom: 16px;">{{ changeLabelSelect ? category.name : 'Category' }}</ion-label>
+      <ion-select (click)="open($event)" formControlName="categoryId" ok-text="Okay" cancel-text="Nah" style="margin-bottom: 4px;font-size: 15px;">
+        <ion-select-option *ngFor="let category of categories$ | async" [value]="category.id">{{category.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="!this.order" mode="ios" lines="none" class="item-select-st">
+      <ion-label style="font-size: 15px;margin-bottom: 16px;">Category</ion-label>
+      <ion-select formControlName="categoryId" ok-text="Okay" cancel-text="Nah" style="margin-bottom: 4px;font-size: 15px;">
+        <ion-select-option *ngFor="let category of categories$ | async" [value]="category.id">{{category.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <!--<ion-item lines="none" style="margin-bottom: -12px;">
+      <ion-label style="font-size: 20px;margin-top: -10px;" position="stacked">Capture current location:</ion-label>
+      <ion-toggle style="margin-top: 15px;" slot="end" mode="ios" color="dark"></ion-toggle>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label style="margin-bottom: 10px;font-size: 20px;" position="stacked">Address:</ion-label>
+      <ion-input formControlName="address" class="input-simple"></ion-input>
+    </ion-item>
+    <ion-item mode="ios" lines="none" style="height: 40px;width: 91%;margin: 12px auto 0px auto;border: 1px solid #000;border-radius: 15px;border-bottom: solid 2px #464646;">
+      <ion-label style="font-size: 15px;margin-bottom: 16px;">Customer</ion-label>
+      <ion-select ok-text="Okay" formControlName="userId" cancel-text="Nah" style="margin-bottom: 4px;font-size: 15px;">
+        <ion-select-option *ngFor="let user of users" [value]="user.id">{{user.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>-->
+    <ion-list style="text-align:center;margin-top: 10px;">
+      <ion-button (click)="submitOrder()" size="default" mode="ios" color="dark">{{ isEditMode ? 'Update' : 'Create' }} service order</ion-button>
+    </ion-list>
+    
+  </ion-card>
+
+</form>
+</ion-content>

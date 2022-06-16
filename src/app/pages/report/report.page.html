@@ -1,0 +1,48 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-menu-button style="font-size: 30px;"></ion-menu-button>
+  </ion-buttons>
+</ion-toolbar>
+
+<ion-content [fullscreen]="true">
+  <ion-grid style="border-radius: 20px;">
+    <ion-row>
+      <ion-col size="9">
+        <ion-text color="secondary">
+          <h1 style="margin-left: 20px;font-family: system-ui;color: #000;font-weight: 800;">
+            Listado de presencia laboral
+          </h1>
+        </ion-text>
+      </ion-col>
+      <ion-col size="3">
+        <ion-icon style="font-size: 33px;text-align: center;margin-top: 25px;margin-left: -25px;" name="calendar-outline"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list>
+
+    <ion-card *ngFor="let report of report$ | async" class="card-st">
+      <ion-card-header style="padding-bottom: 2px;">
+        <ion-card-title style="text-decoration: underline;font-weight: bold;color: #000;font-size: 20px;">{{ report.date }}
+        </ion-card-title>
+        <ion-grid>
+          <ion-row style="margin-left: -10px;">
+            <ion-col size="6">
+              <ion-text color="secondary">
+                <ion-card-subtitle>Hora de entrada: {{ report.check_in_time }}</ion-card-subtitle>
+              </ion-text>
+            </ion-col>
+            <ion-col size="6">
+              <ion-text color="secondary">
+                <ion-card-subtitle>Hora de salida: {{ report.check_out_time }}</ion-card-subtitle>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+    </ion-card>
+
+  </ion-list>
+
+</ion-content>

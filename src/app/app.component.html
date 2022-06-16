@@ -1,0 +1,53 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu type="overlay" contentId="main-content">
+      <ion-content>
+      
+        <div class="menu-header-bg">
+          <div class="header-content">
+            <img src="./assets/jahuga_logo_white.png">
+            <ion-label>
+              <h2>Jahuga App</h2>
+              <p class="head-subtitle-center">Reserva de canchas</p>
+            </ion-label>
+          </div>
+        </div>
+
+        <ion-list id="inbox-list" class="menu-items" lines="none">
+          <ion-menu-toggle auto-hide="false">
+            <ion-item [routerLink]="['/tabs/dashboard']">
+              <ion-icon name="grid-outline"></ion-icon><ion-label>Inicio</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item [routerLink]="['/tabs/profile']">
+              <ion-icon name="calendar-outline"></ion-icon><ion-label>Mis Reservas</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item [routerLink]="['/tabs/orders']">
+              <ion-icon name="globe-outline"></ion-icon><ion-label>Mapa</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item [routerLink]="['/tabs/materials']">
+              <ion-icon name="tablet-landscape-outline"></ion-icon><ion-label>Canchas</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item [routerLink]="['/tabs/profile']">
+              <ion-icon name="person-circle-outline"></ion-icon><ion-label>Mi Cuenta</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item (click)="logout()">
+              <ion-icon name="log-out-outline"></ion-icon><ion-label>Cerrar Sesión</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+        
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

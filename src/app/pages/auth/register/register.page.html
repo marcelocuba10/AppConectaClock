@@ -1,0 +1,80 @@
+<ion-content class="background">
+  <ion-fab (click)="dismissRegister()" vertical="top" horizontal="start" slot="fixed">
+    <ion-fab-button color="success">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-grid style="margin-top: 12vw">
+    <ion-row>
+      <ion-col>
+        <ion-text color="secondary">
+          <h1 style="text-align: center;color: #000;font-weight: 800;font-size: 30px;">
+            Crear Cuenta
+          </h1>
+          <p style="font-size: 20px;text-align: center;width: 70%;color: #000;font-family: system-ui;margin: auto;margin-bottom: 20px;line-height: 1em;">
+            Ingresá tus datos para registrarte
+          </p>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <form #form="ngForm" (ngSubmit)="register(form)" method="post" style="width: 80%; margin: auto">
+
+    <ion-item lines="none">
+      <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Nombre</ion-label>
+      <ion-input ngModel type="text" name="first_name" class="input-cl"></ion-input>
+    </ion-item>
+
+    <!-- <ion-item lines="none">
+      <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Apellidos</ion-label>
+      <ion-input ngModel type="text" name="last_name" class="input-cl"></ion-input>
+    </ion-item> -->
+
+    <ion-item lines="none">
+      <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Teléfono</ion-label>
+      <ion-input ngModel type="text" name="phone" class="input-cl"></ion-input>
+    </ion-item>
+
+    <!-- <ion-item lines="none">
+      <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Dirección</ion-label>
+      <ion-input ngModel type="text" name="address" class="input-cl"></ion-input>
+    </ion-item> -->
+
+    <ion-item lines="none">
+      <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Email</ion-label>
+      <ion-input ngModel type="email" name="email" class="input-cl" ></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Contraseña</ion-label>
+      <ion-input ngModel type="password" name="password" class="input-cl"></ion-input>
+    </ion-item>
+
+    <ion-button type="submit" style="box-shadow: 3px 6px 7px 0px #0000005e;border-radius: 30px; margin-top: 40px;" mode="ios" size="large" shape="round" expand="block" color="success">
+      Registrarme
+    </ion-button>
+  
+  </form>
+  
+  <!-- <ion-text color="secondary">
+    <h1 style="text-align: center;color: #5e5e5e;font-size: 18px;width: 50%;margin: 40px auto;" class="line-middle">
+      <span>Or</span>
+    </h1>
+  </ion-text>
+
+  <ion-grid style="width: 50%">
+    <ion-row>
+      <ion-col>
+        <ion-icon style="font-size: 35px;color: #525252;float: right;padding-right: 5px;" name="logo-google"></ion-icon>
+      </ion-col>
+      <ion-col>
+        <ion-icon style="font-size: 35px;color: #525252;float: left;padding-left: 5px;" name="logo-facebook"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid> 
+
+  <p style="text-align: center; padding-right: 20px; font-size: 14px"> Desarrollado por <b>BadRobotsPY</b></p>-->
+  
+</ion-content>

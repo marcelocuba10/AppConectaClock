@@ -1,0 +1,6 @@
+{
+	"appId": "app.jahuga.badrobotspy",
+	"appName": "Jahuga",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
