@@ -23,8 +23,8 @@ export class ProfilePage implements OnInit {
     private navCtrl: NavController
   ) { }
 
-  ngOnInit() {
-    this.authService.getUser().subscribe(
+  async ngOnInit() {
+    (await this.authService.getUser()).subscribe(
       user => {
         this.user = user;
         console.log(this.user);

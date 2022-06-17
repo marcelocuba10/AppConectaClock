@@ -63,13 +63,6 @@ export class ApiService {
     )
   }
 
-  public getReportByUser(id:number): Observable<Report> {
-    return this.http.get<Report>(this.API_URL + 'report/user/' + id, this.httpHeader)
-    .pipe(
-      catchError(this.errorHandler)
-    )
-  }
-
   public addReport(report: Report): Observable<Report> {
     return this.http.post<Report>(this.API_URL + 'report/', report, this.httpHeader);
   }

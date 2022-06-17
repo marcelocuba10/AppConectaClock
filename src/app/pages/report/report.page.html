@@ -22,7 +22,7 @@
 
   <ion-list>
 
-    <ion-card *ngFor="let report of report$ | async" class="card-st">
+    <ion-card *ngFor="let report of reports" class="card-st">
       <ion-card-header style="padding-bottom: 2px;">
         <ion-card-title style="text-decoration: underline;font-weight: bold;color: #000;font-size: 20px;">{{ report.date }}
         </ion-card-title>

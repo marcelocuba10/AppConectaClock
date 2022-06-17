@@ -20,7 +20,7 @@ export class MainPage implements OnInit {
 
   //user: User;
   private report = {} as Report;
-  private user = {} as User;
+  public user: User;
   public dateTime;
   public day;
 
@@ -36,8 +36,8 @@ export class MainPage implements OnInit {
     this.menu.enable(true);
   }
 
-  ngOnInit() {
-    this.authService.getUser().subscribe(
+  async ngOnInit() {
+    (await this.authService.getUser()).subscribe(
       user => {
         this.user = user;
         console.log(this.user);
@@ -59,18 +59,10 @@ export class MainPage implements OnInit {
   }
 
   public addCheckInTime() {
-
     this.appService.presentLoading(1);
-
     let response: Observable<Report>;
 
-    // if (!this.form.value['name']) {
-    //   this.appService.presentAlert('Field ' + this.form.value['name'] + ' not valid');
-    // }
-
-
     //action create
-
     this.report.date = moment().format('L');
     this.report.check_in_time = this.dateTime;
     this.report.check_out_time = 'Pending';
@@ -83,7 +75,6 @@ export class MainPage implements OnInit {
       this.appService.presentAlert('Hora de ingreso guardada: ' + this.dateTime);
       console.log(report);
     });
-    
   }
 
 }

@@ -9,18 +9,18 @@ import { AuthService } from '../services/auth.service';
 })
 export class TabsPage {
 
-  user: User;
+  public user: User;
   userRole;
 
   constructor(
     private authService:AuthService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     console.log('run in the first moment');
 
     //get User
-    this.authService.getUser().subscribe(
+    (await this.authService.getUser()).subscribe(
       user => {
         this.user = user;
         this.userRole = user.role;
