@@ -17,7 +17,7 @@ export class TabsPage {
   ) {}
 
   async ngOnInit() {
-    console.log('run in the first moment');
+    console.log('load tab');
 
     //get User
     (await this.authService.getUser()).subscribe(

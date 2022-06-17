@@ -27,22 +27,15 @@ export class MainPage implements OnInit {
   //important call MenuController, show icon "menu"
   constructor(
     private menu: MenuController,
-    private authService: AuthService,
     private appService: AppService,
     private apiService: ApiService,
-    private navCtrl: NavController,
   ) {
     this.startTime();
     this.menu.enable(true);
   }
 
   async ngOnInit() {
-    (await this.authService.getUser()).subscribe(
-      user => {
-        this.user = user;
-        console.log(this.user);
-      }
-    );
+    console.log('load tab');
   }
 
   startTime() {
@@ -51,7 +44,6 @@ export class MainPage implements OnInit {
     }.bind(this), 500);
 
     this.day = moment().locale('es').format('LL');
-
   }
 
   public addCheckOutTime() {
