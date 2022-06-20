@@ -10,20 +10,19 @@ import { AuthService } from '../services/auth.service';
 export class TabsPage {
 
   public user: User;
-  userRole;
 
   constructor(
-    private authService:AuthService
-  ) {}
+    private authService: AuthService
+  ) { }
 
   async ngOnInit() {
     console.log('load tab');
 
-    //get User
-    (await this.authService.getUser()).subscribe(
+    //get current user
+    this.authService.getUser().subscribe(
       user => {
         this.user = user;
-        this.userRole = user.role;
+        console.log('user logged info tab:');
         console.log(user);
       }
     );

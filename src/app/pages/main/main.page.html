@@ -39,12 +39,12 @@
   <ion-grid style="border-radius: 20px;margin-top: 55px;">
     <ion-row style="text-align: center;">
       <ion-col>
-        <ion-button (click)="addCheckInTime()" mode="ios" size="large" shape="round" color="success">Marcar Entrada</ion-button>
+        <ion-button (click)="addCheckInTime()" mode="ios" size="large" shape="round" color="success" [disabled]="btnCheckIn">Marcar Entrada</ion-button>
       </ion-col>
     </ion-row>
     <ion-row style="text-align: center;">
       <ion-col>
-        <ion-button (click)="addCheckOutTime()" mode="ios" size="large" shape="round" color="warning">Marcar Salida</ion-button>
+        <ion-button (click)="addCheckOutTime()" mode="ios" size="large" shape="round" color="warning" [disabled]="btnCheckOut">Marcar Salida</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -28,7 +28,7 @@ export class ApiService {
 
   errorHandler(error) {
     let errorMessage = '';
-    if(error.error instanceof ErrorEvent) {
+    if (error.error instanceof ErrorEvent) {
       errorMessage = error.error.message;
     } else {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
@@ -58,21 +58,28 @@ export class ApiService {
 
   public getReportsByUser(id: number): Observable<Report> {
     return this.http.get<Report>(this.API_URL + 'report/user/' + id, this.httpHeader)
-    .pipe(
-      catchError(this.errorHandler)
-    )
+      .pipe(
+        catchError(this.errorHandler)
+      )
+  }
+
+  public getReportDay(id: number): Observable<Report> {
+    return this.http.get<Report>(this.API_URL + 'report/user/check/' + id, this.httpHeader)
+      .pipe(
+        catchError(this.errorHandler)
+      )
   }
 
   public addReport(report: Report): Observable<Report> {
     return this.http.post<Report>(this.API_URL + 'report/', report, this.httpHeader);
   }
 
-  public updateGround(groundId: number, ground: Ground): Observable<Ground> {
-    return this.http.put<Ground>(this.API_URL + 'grounds/' + groundId, ground, this.httpHeader);
+  public updateReport(reportId: number, report: Report): Observable<Report> {
+    return this.http.put<Report>(this.API_URL + 'report/' + reportId, report, this.httpHeader);
   }
 
-  public deleteGround(groundId: number): Observable<Ground> {
-    return this.http.delete<Ground>(this.API_URL + 'grounds/' + groundId, this.httpHeader);
+  public deleteReport(reportId: number): Observable<Report> {
+    return this.http.delete<Report>(this.API_URL + 'report/' + reportId, this.httpHeader);
   }
 
   /*** get Schedules ***/

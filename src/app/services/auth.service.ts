@@ -13,6 +13,7 @@ export class AuthService {
 
   isLoggedIn = false;
   token: any;
+  public user: User;
 
   constructor(
     private http: HttpClient,
@@ -20,9 +21,9 @@ export class AuthService {
     private env: ApiService,
   ) { }
 
-  async getUser() {
+   getUser() {
     const headers = new HttpHeaders({ 'Authorization': this.token["token_type"] + " " + this.token["access_token"] });
-    return await this.http.get<User>(this.env.API_URL + 'auth/user', { headers: headers })
+    return  this.http.get<User>(this.env.API_URL + 'auth/user', { headers: headers })
       .pipe(
         tap(user => user)
       );
