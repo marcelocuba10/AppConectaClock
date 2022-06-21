@@ -7,6 +7,7 @@ import { AppService } from 'src/app/services/app.service';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { TabsPage } from 'src/app/tabs/tabs.page';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-report',
@@ -20,11 +21,13 @@ export class ReportPage implements OnInit {
   reports: Report;
 
   constructor(
+    private menu: MenuController, //icon hamburguer menu
     public apiService: ApiService,
     private appService: AppService,
     private tab: TabsPage, //variable global user from page main;
   ) {
     console.log("load constructor");
+    this.menu.enable(true);
   }
 
   ngOnInit() {

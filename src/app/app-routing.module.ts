@@ -33,9 +33,12 @@ const routes: Routes = [
     path: 'reports',
     loadChildren: () => import('./pages/report/report.module').then( m => m.ReportPageModule),
     canActivate:[AuthGuard]
+  },
+  {
+    path: 'notification',
+    loadChildren: () => import('./pages/notification/notification.module').then( m => m.NotificationPageModule),
+    canActivate:[AuthGuard]
   }
-
-
 ];
 @NgModule({
   imports: [

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { Ground } from 'src/app/models/ground';
-// import { Booking } from '../../models/report';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 import { ApiService } from './../../services/api.service';

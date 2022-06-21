@@ -34,7 +34,7 @@ export class MainPage implements OnInit {
 
   //important call MenuController, show icon "menu"
   constructor(
-    private menu: MenuController,
+    private menu: MenuController, //icon hamburguer menu
     private appService: AppService,
     private apiService: ApiService,
     private authService: AuthService,

@@ -3,8 +3,6 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 
-import { Ground } from '../models/ground';
-import { Schedule } from '../models/schedule';
 import { Report } from '../models/report';
 import { User } from '../models/user';
 
@@ -82,11 +80,10 @@ export class ApiService {
     return this.http.delete<Report>(this.API_URL + 'report/' + reportId, this.httpHeader);
   }
 
-  /*** get Schedules ***/
-  public getSchedules(): Observable<Schedule[]> {
-    return this.http.get<Schedule[]>(this.API_URL + 'schedules', this.httpHeader);
+  /*** get notifications ***/
+  public getNotifications(): Observable<Notification[]> {
+    return this.http.get<Notification[]>(this.API_URL + 'notifications/', this.httpHeader);
   }
-
 
   /*** get User ***/
   public getUsers(): Observable<User> {
