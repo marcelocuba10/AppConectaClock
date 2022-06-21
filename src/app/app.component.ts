@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, Platform } from '@ionic/angular';
-import { User } from './models/user';
 import { AppService } from './services/app.service';
 import { AuthService } from './services/auth.service';
 
@@ -11,8 +10,6 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
 
-  public user: User;
-
   constructor(
     private authService: AuthService,
     private navCtrl: NavController,
@@ -22,25 +19,12 @@ export class AppComponent {
     this.initializeApp();
   }
 
-  async ngOnInit() {
-    (await this.authService.getUser()).subscribe(
-      user => {
-        this.user = user;
-        console.log(this.user);
-      }
-    );
-  }
-
-  ionViewWillEnter() {
-  }
-
   initializeApp() {
     this.platform.ready().then(() => {
       // Commenting splashScreen Hide, so it won't hide splashScreen before auth check
       //this.splashScreen.hide();
       this.authService.getToken();
     });
-    
   }
 
   // When Logout Button is pressed

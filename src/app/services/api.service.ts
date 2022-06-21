@@ -12,8 +12,8 @@ import { User } from '../models/user';
 })
 export class ApiService {
 
-  //API_URL = 'https://jahuga.badrobotspy.com/api/';
-  API_URL = 'http://127.0.0.1:8000/api/';
+  API_URL = 'https://conectaclock.badrobotspy.com/api/';
+  //API_URL = 'http://127.0.0.1:8000/api/';
 
   httpHeader = {
     headers: new HttpHeaders({
@@ -82,22 +82,7 @@ export class ApiService {
 
   /*** get notifications ***/
   public getNotifications(): Observable<Notification[]> {
-    return this.http.get<Notification[]>(this.API_URL + 'notifications/', this.httpHeader);
-  }
-
-  /*** get User ***/
-  public getUsers(): Observable<User> {
-    return this.http.get<User>(this.API_URL + 'users/', this.httpHeader).pipe(
-      retry(2),
-      catchError(this.handleError)
-    );
-  }
-
-  public getUserById(id): Observable<User> {
-    return this.http.get<User>(this.API_URL + 'users/' + id, this.httpHeader).pipe(
-      retry(2),
-      catchError(this.handleError)
-    );
+    return this.http.get<Notification[]>(this.API_URL + 'notifications', this.httpHeader);
   }
 
 }
