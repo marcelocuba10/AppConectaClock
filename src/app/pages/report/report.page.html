@@ -35,8 +35,11 @@
               </ion-text>
             </ion-col>
             <ion-col size="6">
-              <ion-text color="secondary">
+              <ion-text color="secondary" *ngIf="report.check_out_time">
                 <ion-card-subtitle>Hora de salida:<br> {{ report.check_out_time }}</ion-card-subtitle>
+              </ion-text>
+              <ion-text color="secondary" *ngIf="!report.check_out_time">
+                <ion-card-subtitle>Hora de salida: <br>Pendiente</ion-card-subtitle>
               </ion-text>
             </ion-col>
           </ion-row>

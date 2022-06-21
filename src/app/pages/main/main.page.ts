@@ -13,6 +13,8 @@ import { take } from 'rxjs/operators';
 import { TabsPage } from 'src/app/tabs/tabs.page';
 import { DatePipe } from '@angular/common'
 
+import { Geolocation } from '@capacitor/geolocation';
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.page.html',
@@ -20,17 +22,19 @@ import { DatePipe } from '@angular/common'
 })
 export class MainPage implements OnInit {
 
-  //user: User;
   private report = {} as Report;
-  reports: Report;
+  public reports: Report;
   public user: User;
   public reportIdDay;
 
-  btnCheckIn = true;
-  btnCheckOut = true;
+  public btnCheckIn = true;
+  public btnCheckOut = true;
 
   public time;
   public day;
+
+  public latitude: number;
+  public longitude: number;
 
   //important call MenuController, show icon "menu"
   constructor(
@@ -39,7 +43,7 @@ export class MainPage implements OnInit {
     private apiService: ApiService,
     private authService: AuthService,
     private tab: TabsPage, //variable global user from page main;
-    public datepipe: DatePipe
+    public datepipe: DatePipe,
   ) {
     console.log("load constructor");
     this.startTime();
@@ -60,6 +64,17 @@ export class MainPage implements OnInit {
     console.log("load ionViewWillEnter");
     console.log(this.tab.user.id);
     this.CheckReport();
+    this.getCurrentLocation();
+  }
+
+  async getCurrentLocation(){
+    const coordinates = await Geolocation.getCurrentPosition().then((resp) => {
+      this.latitude= resp.coords.latitude;
+      this.longitude= resp.coords.longitude;
+      console.log('Current position:', resp.coords);
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });
   }
 
   startTime() {
@@ -85,14 +100,14 @@ export class MainPage implements OnInit {
 
           if (data[0]['check_in_time']) {
             //entry time already checkIn
-            console.log('ingresa en check in');
+            console.log('check-in ok');
             this.btnCheckOut = false; //enable button CheckOut
             this.btnCheckIn = true; //disable button CheckIn
           }
 
           if (data[0]['check_in_time'] && data[0]['check_out_time']) {
             //all time already check
-            console.log('ingresa en ambos');
+            console.log('check-in and check-out ok');
             this.btnCheckOut = true; //disable button CheckOut
             this.btnCheckIn = true; //disable button CheckIn
           }
@@ -118,6 +133,8 @@ export class MainPage implements OnInit {
     this.report.check_in_time = this.time;
     this.report.check_out_time = null;
     this.report.user_id = this.user.id;
+    this.report.address_latitude_in = this.latitude;
+    this.report.address_longitude_in = this.longitude;
 
     response = this.apiService.addReport(this.report);
 
@@ -136,6 +153,8 @@ export class MainPage implements OnInit {
     //action update
     this.report.check_out_time = this.time;
     this.report.user_id = this.user.id;
+    this.report.address_latitude_out = this.latitude;
+    this.report.address_longitude_out = this.longitude;
 
     response = this.apiService.updateReport(this.reportIdDay, this.report);
 
