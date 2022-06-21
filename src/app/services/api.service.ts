@@ -69,7 +69,7 @@ export class ApiService {
   }
 
   public addReport(report: Report): Observable<Report> {
-    return this.http.post<Report>(this.API_URL + 'report/', report, this.httpHeader);
+    return this.http.post<Report>(this.API_URL + 'report', report, this.httpHeader);
   }
 
   public updateReport(reportId: number, report: Report): Observable<Report> {
