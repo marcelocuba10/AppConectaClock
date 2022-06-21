@@ -63,7 +63,7 @@ export class ApiService {
       )
   }
 
-  public getReportDay(id: number): Observable<Report> {
+  public verifyReport(id: number): Observable<Report> {
     return this.http.get<Report>(this.API_URL + 'report/user/check/' + id, this.httpHeader)
       .pipe(
         catchError(this.errorHandler)

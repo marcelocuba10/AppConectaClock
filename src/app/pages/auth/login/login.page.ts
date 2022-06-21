@@ -55,7 +55,7 @@ export class LoginPage implements OnInit {
       () => {
         this.dismissLogin();
         this.appService.presentLoading(0);
-        this.navCtrl.navigateRoot('tabs/main');
+        this.navCtrl.navigateRoot('tabs/home');
       }
     );
   }

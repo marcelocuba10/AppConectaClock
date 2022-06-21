@@ -30,16 +30,10 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/main',
+        redirectTo: '/tabs/home',
         pathMatch: 'full'
       }
     ]
-  },
-  //Force show tab bottom when url not contain /tabs/
-  {
-    path: 'main',
-    redirectTo: '/tabs/main',
-    pathMatch: 'full'
   },
   //on init app, show login page
   {
@@ -48,28 +42,18 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'main',
+    redirectTo: '/tabs/main',
+    pathMatch: 'full'
+  },
+  {
     path: 'reports',
     redirectTo: '/tabs/reports',
     pathMatch: 'full'
   },
   {
-    path: 'order-detail/:id',
-    redirectTo: '/tabs/order-detail/:id',
-    pathMatch: 'full'
-  },
-  {
-    path: 'new-material/:id',
-    redirectTo: '/tabs/new-material/:id',
-    pathMatch: 'full'
-  },
-  {
-    path: 'dashboard',
-    redirectTo: '/tabs/dashboard',
-    pathMatch: 'full'
-  },
-  {
-    path: 'orders',
-    redirectTo: '/tabs/orders',
+    path: 'notifications',
+    redirectTo: '/tabs/notifications',
     pathMatch: 'full'
   },
   {
@@ -77,7 +61,6 @@ const routes: Routes = [
     redirectTo: '/tabs/home',
     pathMatch: 'full'
   },
-  
 ];
 
 @NgModule({

@@ -31,7 +31,8 @@ const routes: Routes = [
   },
   {
     path: 'reports',
-    loadChildren: () => import('./pages/report/report.module').then( m => m.ReportPageModule)
+    loadChildren: () => import('./pages/report/report.module').then( m => m.ReportPageModule),
+    canActivate:[AuthGuard]
   }
 
 
