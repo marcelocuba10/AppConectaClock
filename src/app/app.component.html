@@ -15,8 +15,13 @@
 
         <ion-list id="inbox-list" class="menu-items" lines="none">
           <ion-menu-toggle auto-hide="false">
-            <ion-item [routerLink]="['/tabs/main']">
+            <ion-item [routerLink]="['/tabs/home']">
               <ion-icon name="grid-outline"></ion-icon><ion-label>Inicio</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item [routerLink]="['/tabs/main']">
+              <ion-icon name="alarm-outline"></ion-icon><ion-label>Marcar Horario</ion-label>
             </ion-item>
           </ion-menu-toggle>
           <ion-menu-toggle auto-hide="false">

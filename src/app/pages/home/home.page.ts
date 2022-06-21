@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ApiService } from './../../services/api.service';
 import { AppService } from 'src/app/services/app.service';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -18,11 +19,12 @@ export class HomePage {
   //grounds$: Observable<Ground[]>;
 
   constructor(
-    private router: Router,
+    private menu: MenuController, //icon hamburguer menu
     public apiService: ApiService,
     public appService: AppService
   ) {
     console.log('Load constructor');
+    this.menu.enable(true);
   }
 
   ngOnInit() {
