@@ -27,8 +27,9 @@ export class AppService {
   async presentAlert(message: string) {
     const alert = await this.alertCtrl.create({
       cssClass: 'my-custom-class',
-      header: 'Atención',
+      header: 'Aviso',
       message,
+      mode:'ios',
       buttons: ['OK']
     });
 

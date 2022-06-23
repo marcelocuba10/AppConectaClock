@@ -68,12 +68,15 @@ export class MainPage implements OnInit {
   }
 
   async getCurrentLocation(){
-    const coordinates = await Geolocation.getCurrentPosition().then((resp) => {
-      this.latitude= resp.coords.latitude;
-      this.longitude= resp.coords.longitude;
+
+    await Geolocation.getCurrentPosition({enableHighAccuracy: true,maximumAge: 0,timeout: 5000,})
+    .then((resp) => {
+      this.latitude= resp.coords.latitude,
+      this.longitude= resp.coords.longitude,
       console.log('Current position:', resp.coords);
      }).catch((error) => {
-       console.log('Error getting location', error);
+      this.appService.presentToast('Error getting location');
+      console.log('Error getting location', error);
      });
   }
 
@@ -150,7 +153,9 @@ export class MainPage implements OnInit {
     this.btnCheckOut = true;
     let response: Observable<Report>;
 
-    //action update
+    //convert date and save
+    const dateTem = new Date();
+    this.report.date = this.datepipe.transform(dateTem, 'd-MM-yyyy');
     this.report.check_out_time = this.time;
     this.report.user_id = this.user.id;
     this.report.address_latitude_out = this.latitude;
