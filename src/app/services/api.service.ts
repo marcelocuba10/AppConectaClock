@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Report } from '../models/report';
+import { Machine } from '../models/machine';
 
 @Injectable({
   providedIn: 'root'
@@ -80,6 +81,22 @@ export class ApiService {
   /*** get notifications ***/
   public getNotifications(): Observable<Notification[]> {
     return this.http.get<Notification[]>(this.API_URL + 'notifications', this.httpHeader);
+  }
+
+  /*** scan qrcode machines ***/
+
+  public getMachineByQRcode(qrcode: number): Observable<Machine> {
+    return this.http.get<Machine>(this.API_URL + 'machine/' + qrcode, this.httpHeader)
+      .pipe(
+        catchError(this.errorHandler)
+      )
+  }
+
+  public updateMachine(qrcode: number, machine: Machine): Observable<Machine> {
+    return this.http.put<Machine>(this.API_URL + 'machine/' + qrcode, machine, this.httpHeader)
+      .pipe(
+        catchError(this.errorHandler)
+      )
   }
 
 }

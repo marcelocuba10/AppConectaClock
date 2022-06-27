@@ -9,6 +9,11 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
+        path: 'qrcode',
+        loadChildren: () => import('../pages/qrcode/qrcode.module').then(m => m.QrcodePageModule),
+        canActivate:[AuthGuard]
+      },
+      {
         path: 'reports',
         loadChildren: () => import('../pages/report/report.module').then(m => m.ReportPageModule),
         canActivate:[AuthGuard]
@@ -44,6 +49,11 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: '/landing',
+    pathMatch: 'full'
+  },
+  {
+    path: 'qrcode',
+    redirectTo: '/tabs/qrcode',
     pathMatch: 'full'
   },
   {

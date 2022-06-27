@@ -38,7 +38,11 @@ const routes: Routes = [
     path: 'notification',
     loadChildren: () => import('./pages/notification/notification.module').then( m => m.NotificationPageModule),
     canActivate:[AuthGuard]
+  },  {
+    path: 'qrcode',
+    loadChildren: () => import('./pages/qrcode/qrcode.module').then( m => m.QrcodePageModule)
   }
+
 ];
 @NgModule({
   imports: [
