@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
 import { CommonModule } from '@angular/common';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +29,7 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule
   ],
   providers: [
+    BarcodeScanner,
     NativeStorage, 
     DatePipe,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
