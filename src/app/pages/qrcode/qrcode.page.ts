@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
-import { AlertController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-qrcode',
@@ -10,74 +11,63 @@ import { AlertController } from '@ionic/angular';
 })
 export class QrcodePage implements OnInit {
 
-  result = null;
-  scanActive = false;
+  scanActive: boolean = false;
+  public QRresult;
 
   constructor(
-    public alertController: AlertController
-  ) { }
+    public alertController: AlertController,
+    private menu: MenuController, //icon hamburguer menu
+    private appService:AppService
+  ) {
+    console.log("load constructor");
+    this.menu.enable(true);
+  }
 
   ngOnInit() {
-    BarcodeScanner.prepare();
   }
 
   async startScanner() {
     const allowed = await this.checkPermission();
-    console.log('startScanner');
 
     if (allowed) {
-      BarcodeScanner.hideBackground(); // make background of WebView transparent
-      const result = await BarcodeScanner.startScan(); // start scanning and wait for a result
-      // if the result has content
+      this.scanActive = true;
+      BarcodeScanner.hideBackground();
+
+      const result = await BarcodeScanner.startScan();
+
       if (result.hasContent) {
-        console.log(result.content); // log the raw scanned content
-        this.result = result.content;
-        this.scanActive=false;
+        this.scanActive = false;
+        alert(result.content); //The QR content will come out here
+        //Handle the data as your heart desires here
+        this.QRresult = result.content;
+      } else {
+        alert('NO DATA FOUND!');
       }
+    } else {
+      alert('NOT ALLOWED!');
     }
-  };
+  }
 
   async checkPermission() {
     return new Promise(async (resolve, reject) => {
-      // check or request permission
       const status = await BarcodeScanner.checkPermission({ force: true });
-
       if (status.granted) {
-        // the user granted permission
         resolve(true);
       } else if (status.denied) {
-        const alert = await this.alertController.create({
-          cssClass: 'my-custom-class',
-          header: 'No Permission',
-          subHeader: 'Error',
-          message: 'Porfavor habilite los permisos de su camara',
-          buttons: [{
-            text: 'No',
-            role: 'Cancel'
-          },
-          {
-            text: 'Open settings',
-            handler: () => {
-              BarcodeScanner.openAppSettings();
-              resolve(false);
-            }
-          }
-          ]
-        });
-      } else {
-        resolve(true);
+        BarcodeScanner.openAppSettings();
+        resolve(false);
       }
     });
   }
 
-  stopScanner(){
-    BarcodeScanner.showBackground();
+  stopScanner() {
     BarcodeScanner.stopScan();
-    this.scanActive=false;
+    this.scanActive = false;
   }
 
-  ngDestroy(){
+  ionViewWillLeave() {
     BarcodeScanner.stopScan();
+    this.scanActive = false;
   }
 
 }
