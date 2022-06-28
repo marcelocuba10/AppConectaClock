@@ -40,14 +40,10 @@
       <ion-input ngModel type="text" name="status" [(ngModel)]="machine.status"  class="lkjh"></ion-input>
     </ion-item>
 
-    <!-- <ion-item>
-      <ion-label>Estado</ion-label>
-      <ion-select interface="popover" mode="ios" ngModel [(ngModel)]="machine.status">
-        <ion-select-option value="Encendido">Encendido</ion-select-option>
-        <ion-select-option value="Apagado">Apagado</ion-select-option>
-        <ion-select-option value="Mantenimiento">Mantenimiento</ion-select-option>
-      </ion-select>
-    </ion-item> -->
+    <ion-item>
+      <ion-icon color="secondary" name="location-outline"></ion-icon><ion-label class="ion-text-center">Estado</ion-label>
+      <ion-toggle color="secondary" [(ngModel)]="toggleValue"></ion-toggle>
+    </ion-item>
 
     <ion-item lines="none">
       <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Observacion</ion-label>

@@ -21,6 +21,7 @@ export class UpdateMachineModalComponent implements OnInit {
 
   user: User;
   machine: Machine;
+  toggleValue: boolean = true;
 
   constructor(
     private modalCtrl: ModalController,
@@ -66,6 +67,12 @@ export class UpdateMachineModalComponent implements OnInit {
   }
 
   async updateMachine(form: NgForm) {
+
+    if (this.toggleValue == true) {
+      console.log('activado');
+    } else {
+      console.log('desactivado');
+    }
 
     this.appService.presentLoading(1);
 
