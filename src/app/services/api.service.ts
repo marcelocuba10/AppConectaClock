@@ -85,14 +85,15 @@ export class ApiService {
 
   /*** scan qrcode machines ***/
 
-  public getMachineByQRcode(qrcode: number): Observable<Machine> {
+  public getMachineByQRcode(qrcode: string): Observable<Machine> {
     return this.http.get<Machine>(this.API_URL + 'machine/' + qrcode, this.httpHeader)
       .pipe(
         catchError(this.errorHandler)
       )
   }
 
-  public updateMachine(qrcode: number, machine: Machine): Observable<Machine> {
+  public updateMachine(qrcode: string, machine: Machine): Observable<Machine> {
+    console.log( machine);
     return this.http.put<Machine>(this.API_URL + 'machine/' + qrcode, machine, this.httpHeader)
       .pipe(
         catchError(this.errorHandler)

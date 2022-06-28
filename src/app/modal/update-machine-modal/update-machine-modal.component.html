@@ -1,0 +1,62 @@
+<ion-content class="background">
+  <ion-fab (click)="dismissModal()" vertical="top" horizontal="start" slot="fixed">
+    <ion-fab-button color="warning">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-grid style="margin-top: 12vw">
+    <ion-row>
+      <ion-col>
+        <ion-text color="secondary">
+          <p style="font-size: 20px;text-align: center;width: 60%;color: #000;margin: auto;margin-top: 20px;font-family: system-ui;line-height: 1em;">
+            Informe actual de la máquina.
+          </p>
+          <h1 *ngIf="machine" style=" text-align: center;color: #000;font-weight: 800;font-size: 30px;">
+            {{ machine.name }}
+          </h1>
+          <h1 *ngIf="!machine" style=" text-align: center;color: #000;font-weight: 800;font-size: 30px;">
+            Máquina Desconocida
+          </h1>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <form #form="ngForm" (ngSubmit)="updateMachine(form)" method="post" style="width: 80%; margin: auto">
+    
+    <ion-item lines="none">
+      <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">QRcode</ion-label>
+      <ion-input ngModel type="text" name="codeQR" [(ngModel)]="machine.codeQR" class="lkjh" readonly></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Funcionario</ion-label>
+      <ion-input ngModel type="text" name="user_id" class="lkjh" readonly>{{ user["name"] }} {{ user["last_name"] }}</ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Estado</ion-label>
+      <ion-input ngModel type="text" name="status" [(ngModel)]="machine.status"  class="lkjh"></ion-input>
+    </ion-item>
+
+    <!-- <ion-item>
+      <ion-label>Estado</ion-label>
+      <ion-select interface="popover" mode="ios" ngModel [(ngModel)]="machine.status">
+        <ion-select-option value="Encendido">Encendido</ion-select-option>
+        <ion-select-option value="Apagado">Apagado</ion-select-option>
+        <ion-select-option value="Mantenimiento">Mantenimiento</ion-select-option>
+      </ion-select>
+    </ion-item> -->
+
+    <ion-item lines="none">
+      <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Observacion</ion-label>
+      <ion-textarea rows="6" cols="20" ngModel type="text" name="observation" [(ngModel)]="machine.observation" class="lkjh"></ion-textarea>
+    </ion-item>
+
+    <ion-button type="submit" class="poiui" mode="ios" size="large" shape="round" expand="block" color="warning">Actualizar Maquina</ion-button>
+    
+  </form>
+
+  
+</ion-content>

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { QrcodePageRoutingModule } from './qrcode-routing.module';
 
 import { QrcodePage } from './qrcode.page';
+import { UpdateMachineModalComponent } from 'src/app/modal/update-machine-modal/update-machine-modal.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { QrcodePage } from './qrcode.page';
     IonicModule,
     QrcodePageRoutingModule
   ],
-  declarations: [QrcodePage]
+  declarations: [QrcodePage,UpdateMachineModalComponent],
+  entryComponents:[UpdateMachineModalComponent]
 })
 export class QrcodePageModule {}

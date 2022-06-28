@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
-import { AlertController, MenuController } from '@ionic/angular';
+import { AlertController, MenuController, ModalController } from '@ionic/angular';
+import { UpdateMachineModalComponent } from 'src/app/modal/update-machine-modal/update-machine-modal.component';
 import { AppService } from 'src/app/services/app.service';
 
 @Component({
@@ -13,11 +14,13 @@ export class QrcodePage implements OnInit {
 
   scanActive: boolean = false;
   public QRresult;
+  //public QRresulte='r34lvGWd';
 
   constructor(
     public alertController: AlertController,
     private menu: MenuController, //icon hamburguer menu
-    private appService:AppService
+    private appService:AppService,
+    private modalCtrl:ModalController
   ) {
     console.log("load constructor");
     this.menu.enable(true);
@@ -37,9 +40,10 @@ export class QrcodePage implements OnInit {
 
       if (result.hasContent) {
         this.scanActive = false;
-        alert(result.content); //The QR content will come out here
+        //alert(result.content); //The QR content will come out here
         //Handle the data as your heart desires here
         this.QRresult = result.content;
+        this.openModal();
       } else {
         alert('NO DATA FOUND!');
       }
@@ -58,6 +62,21 @@ export class QrcodePage implements OnInit {
         resolve(false);
       }
     });
+  }
+
+  async openModal() {
+    console.log(this.QRresult);
+    const modal = await this.modalCtrl.create({
+      component: UpdateMachineModalComponent,
+      cssClass: 'my-custom-class',
+      //pass data to model, in this case id
+      componentProps: {
+        codeQR: this.QRresult,
+      }
+    });
+
+    //go to modal
+    await modal.present();
   }
 
   stopScanner() {
