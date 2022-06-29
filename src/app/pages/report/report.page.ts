@@ -4,7 +4,7 @@ import { User } from 'src/app/models/user';
 import { ApiService } from 'src/app/services/api.service';
 import { AppService } from 'src/app/services/app.service';
 
-import { Observable } from 'rxjs';
+import { empty, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { TabsPage } from 'src/app/tabs/tabs.page';
 import { MenuController } from '@ionic/angular';
@@ -16,7 +16,6 @@ import { MenuController } from '@ionic/angular';
 })
 export class ReportPage implements OnInit {
 
-  report$: Observable<Report>;
   user: User;
   reports: Report;
 
@@ -44,24 +43,13 @@ export class ReportPage implements OnInit {
     console.log(this.tab.user.id);
 
     try {
-      this.appService.presentLoading(1);
       this.apiService.getReportsByUser(this.tab.user.id).subscribe((data: Report) => {
         this.reports = data;
-        this.appService.presentLoading(0);
         console.log(this.reports);
       });
     } catch (error) {
       this.appService.presentAlert(error);
     }
-
-    //#option 2 for get data
-    // this.appService.presentLoading(1);
-    // this.report$ = this.apiService.getReportsByUser(this.main.user.id).pipe(
-    //   tap((reports) => {
-    //     this.appService.presentLoading(0);
-    //     return reports;
-    //   })
-    // );
 
   }
 

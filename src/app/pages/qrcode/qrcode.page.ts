@@ -13,8 +13,8 @@ import { AppService } from 'src/app/services/app.service';
 export class QrcodePage implements OnInit {
 
   scanActive: boolean = false;
-  public QRresult;
-  //public QRresulte='r34lvGWd';
+  //public QRresult;
+  public QRresult='r34lvGWd';
 
   constructor(
     public alertController: AlertController,

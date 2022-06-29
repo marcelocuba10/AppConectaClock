@@ -21,7 +21,7 @@ export class UpdateMachineModalComponent implements OnInit {
 
   user: User;
   machine: Machine;
-  toggleValue: boolean = true;
+  toggleValueStatus: boolean = true;
 
   constructor(
     private modalCtrl: ModalController,
@@ -49,45 +49,47 @@ export class UpdateMachineModalComponent implements OnInit {
 
   async getMachineByQRcode(codeQR: string) {
 
-    //show loading
     this.appService.presentLoading(1);
-
     await this.apiService.getMachineByQRcode(codeQR).subscribe(response => {
-      this.machine = response;
-
-      if (!this.machine) {
+      if (response == null) {
         this.appService.presentLoading(0);
         this.appService.presentAlert('Codigo QR no registrado');
-        console.log(this.machine);
-      }
+      } else {
+        this.machine = response;
+        //toggle status
+        if (this.machine.status == "Encendido") {
+          this.toggleValueStatus = true;
+        }
+        if (this.machine.status == "Apagado") {
+          this.toggleValueStatus = false;
+        }
 
-      this.appService.presentLoading(0);
-      console.log(this.machine);
+        this.appService.presentLoading(0);
+      }
     });
+
   }
 
   async updateMachine(form: NgForm) {
 
-    if (this.toggleValue == true) {
-      console.log('activado');
-    } else {
-      console.log('desactivado');
-    }
-
     this.appService.presentLoading(1);
 
+    //pass data
+    this.machine.user_id = this.user.id;
+    this.machine.observation = form.value.observation;
+    if (this.toggleValueStatus == true) {
+      console.log('Encendido');
+      this.machine.status = "Encendido";
+    } else {
+      console.log('Apagado');
+      this.machine.status = "Apagado";
+    }
+
     let response: Observable<Machine>;
+    response = this.apiService.updateMachine(this.machine.codeQR, this.machine);
 
-    form.value.user_id = this.user.id;
-    form.value.name = this.machine.name;
-    form.value.customer_id = this.machine.customer_id;
-
-    console.log(form.value);
-
-    response = this.apiService.updateMachine(this.machine.codeQR,form.value);
-
-    response.pipe(take(1)).subscribe(async (machine) => {
-      await this.appService.presentLoading(0);
+    response.pipe(take(1)).subscribe((machine) => {
+      this.appService.presentLoading(0);
       this.appService.presentAlert('Maquina actualizada');
       this.dismissModal();
     });

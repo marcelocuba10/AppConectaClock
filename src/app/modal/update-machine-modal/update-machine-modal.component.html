@@ -23,36 +23,113 @@
     </ion-row>
   </ion-grid>
 
-  <form #form="ngForm" (ngSubmit)="updateMachine(form)" method="post" style="width: 80%; margin: auto">
+  <div *ngIf="machine">
+    <form #form="ngForm" (ngSubmit)="updateMachine(form)" method="post" style="width: 80%; margin: auto">
     
-    <ion-item lines="none">
-      <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">QRcode</ion-label>
-      <ion-input ngModel type="text" name="codeQR" [(ngModel)]="machine.codeQR" class="lkjh" readonly></ion-input>
-    </ion-item>
-
-    <ion-item lines="none">
-      <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Funcionario</ion-label>
-      <ion-input ngModel type="text" name="user_id" class="lkjh" readonly>{{ user["name"] }} {{ user["last_name"] }}</ion-input>
-    </ion-item>
-
-    <ion-item lines="none">
-      <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Estado</ion-label>
-      <ion-input ngModel type="text" name="status" [(ngModel)]="machine.status"  class="lkjh"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-icon color="secondary" name="location-outline"></ion-icon><ion-label class="ion-text-center">Estado</ion-label>
-      <ion-toggle color="secondary" [(ngModel)]="toggleValue"></ion-toggle>
-    </ion-item>
-
-    <ion-item lines="none">
-      <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Observacion</ion-label>
-      <ion-textarea rows="6" cols="20" ngModel type="text" name="observation" [(ngModel)]="machine.observation" class="lkjh"></ion-textarea>
-    </ion-item>
-
-    <ion-button type="submit" class="poiui" mode="ios" size="large" shape="round" expand="block" color="warning">Actualizar Maquina</ion-button>
-    
-  </form>
-
+      <!-- <ion-item lines="none">
+        <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">QRcode</ion-label>
+        <ion-input ngModel type="text" name="codeQR" [(ngModel)]="machine.codeQR" class="lkjh" readonly></ion-input>
+      </ion-item> -->
   
+      <ion-item lines="none">
+        <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Funcionario</ion-label>
+        <ion-input ngModel type="text" name="user_id" class="lkjh" readonly>{{ user["name"] }} {{ user["last_name"] }}</ion-input>
+      </ion-item>
+  
+      <!-- <ion-item lines="none">
+        <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Estado</ion-label>
+        <ion-input ngModel type="text" name="status" [(ngModel)]="machine.status"  class="lkjh"></ion-input>
+      </ion-item> -->
+  
+      <ion-item style="margin: 20px 0px 10px 0px;" lines="none">
+        <ion-label>Estado de la máquina</ion-label>
+        <ion-toggle mode="ios" slot="end" name="status" color="success" checked [(ngModel)]="toggleValueStatus"></ion-toggle>
+      </ion-item>
+  
+      <ion-item lines="none">
+        <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Observación</ion-label>
+        <ion-textarea rows="6" cols="20" ngModel type="text" name="observation" [(ngModel)]="machine.observation" class="lkjh"></ion-textarea>
+      </ion-item>
+  
+      <ion-button type="submit" class="poiui" mode="ios" size="large" shape="round" expand="block" color="warning">Actualizar Máquina</ion-button>
+      
+    </form>
+  </div>
+
+
+<!-- Skeleton screen -->
+<div *ngIf="!machine">
+  <ion-list>
+    <ion-list-header>
+      <ion-label>
+        <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+      </ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</div>
+
 </ion-content>

@@ -40,12 +40,19 @@ export class NotificationPage implements OnInit {
 
   getNotifications() {
     console.log("load getNotifications");
-    this.appService.presentLoading(1);
-    this.apiService.getNotifications().subscribe(response => {
-      this.notifications = response;
-      this.appService.presentLoading(0);
-      console.log(this.notifications);
-    });
+    try {
+      this.apiService.getNotifications().subscribe(response => {
+        if (response == null || response.length == 0) {
+          this.notifications = 'Sin Avisos';
+        } else {
+          this.notifications = response;
+          console.log(this.notifications);
+        }
+      });
+    } catch (error) {
+      this.appService.presentAlert(error);
+    }
+
   }
 
 }
