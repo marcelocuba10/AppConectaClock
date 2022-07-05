@@ -40,11 +40,23 @@
         <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Estado</ion-label>
         <ion-input ngModel type="text" name="status" [(ngModel)]="machine.status"  class="lkjh"></ion-input>
       </ion-item> -->
+
+      <ion-item lines="none">
+        <ion-label style="margin-bottom: 0px; font-size: 20px" position="stacked">Estado:</ion-label>
+        <ion-select class="ohljk" interface="popover"  mode="ios" name="status" [(ngModel)]="machine.status">
+          <ion-select-option value="Encendido">Encendido</ion-select-option>
+          <ion-select-option value="Apagado">Apagado</ion-select-option>
+          <ion-select-option value="Mantenimiento">Mantenimiento</ion-select-option>
+          <ion-select-option value="Requiere Atención">Requiere Atención</ion-select-option>
+          <ion-select-option value="Error">Error</ion-select-option>
+          <ion-select-option value="Offline">Offline</ion-select-option>
+        </ion-select>
+      </ion-item>
   
-      <ion-item style="margin: 20px 0px 10px 0px;" lines="none">
+      <!-- <ion-item style="margin: 20px 0px 10px 0px;" lines="none">
         <ion-label>Estado de la máquina</ion-label>
         <ion-toggle mode="ios" slot="end" name="status" color="success" [(ngModel)]="toggleValueStatus"></ion-toggle>
-      </ion-item>
+      </ion-item> -->
   
       <ion-item lines="none">
         <ion-label style="margin-bottom: 10px; font-size: 20px" position="stacked">Observación</ion-label>

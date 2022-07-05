@@ -48,6 +48,8 @@ export class MainPage implements OnInit {
     console.log("load constructor");
     this.startTime();
     this.menu.enable(true);
+    this.CheckReport();
+    this.getCurrentLocation();
   }
 
   async ngOnInit() {

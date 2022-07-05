@@ -71,7 +71,7 @@ export class QrcodePage implements OnInit {
       cssClass: 'my-custom-class',
       //pass data to model, in this case id
       componentProps: {
-        codeQR: this.QRresult,
+        codeQR: 'QMU79UQn',
       }
     });
 

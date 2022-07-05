@@ -8,12 +8,12 @@ import { User } from 'src/app/models/user';
 import { Machine } from 'src/app/models/machine';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-
 @Component({
   selector: 'app-update-machine-modal',
   templateUrl: './update-machine-modal.component.html',
   styleUrls: ['./update-machine-modal.component.scss'],
 })
+
 export class UpdateMachineModalComponent implements OnInit {
 
   //receive data from qrcode page
@@ -21,14 +21,14 @@ export class UpdateMachineModalComponent implements OnInit {
 
   user: User;
   machine: Machine;
-  toggleValueStatus: boolean = true;
+  //toggleValueStatus: boolean = true;
 
   constructor(
     private modalCtrl: ModalController,
     private appService: AppService,
     private apiService: ApiService,
     private authService: AuthService,
-  ) { }
+  ) {}
 
   ngOnInit() {
     //get User
@@ -56,13 +56,13 @@ export class UpdateMachineModalComponent implements OnInit {
         this.appService.presentAlert('Codigo QR no registrado');
       } else {
         this.machine = response;
-        //toggle status
-        if (this.machine.status == "Encendido") {
-          this.toggleValueStatus = true;
-        }
-        if (this.machine.status == "Apagado") {
-          this.toggleValueStatus = false;
-        }
+        // //toggle status
+        // if (this.machine.status == "Encendido") {
+        //   this.toggleValueStatus = true;
+        // }
+        // if (this.machine.status == "Apagado") {
+        //   this.toggleValueStatus = false;
+        // }
 
         this.appService.presentLoading(0);
       }
@@ -73,17 +73,19 @@ export class UpdateMachineModalComponent implements OnInit {
   async updateMachine(form: NgForm) {
 
     this.appService.presentLoading(1);
-
+    console.log(form.value.status);
     //pass data
     this.machine.user_id = this.user.id;
     this.machine.observation = form.value.observation;
-    if (this.toggleValueStatus == true) {
-      console.log('Encendido');
-      this.machine.status = "Encendido";
-    } else {
-      console.log('Apagado');
-      this.machine.status = "Apagado";
-    }
+    this.machine.status = form.value.status;
+
+    // if (this.toggleValueStatus == true) {
+    //   console.log('Encendido');
+    //   this.machine.status = "Encendido";
+    // } else {
+    //   console.log('Apagado');
+    //   this.machine.status = "Apagado";
+    // }
 
     let response: Observable<Machine>;
     response = this.apiService.updateMachine(this.machine.codeQR, this.machine);
