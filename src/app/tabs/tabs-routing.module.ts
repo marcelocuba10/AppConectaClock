@@ -9,6 +9,11 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
+        path: '',
+        redirectTo: '/tabs/home',
+        pathMatch: 'full'
+      },
+      {
         path: 'qrcode',
         loadChildren: () => import('../pages/qrcode/qrcode.module').then(m => m.QrcodePageModule),
         canActivate:[AuthGuard]
@@ -37,11 +42,6 @@ const routes: Routes = [
         path: 'profile',
         loadChildren: () => import('../pages/profile/profile.module').then(m => m.ProfilePageModule),
         canActivate:[AuthGuard]
-      },
-      {
-        path: '',
-        redirectTo: '/tabs/home',
-        pathMatch: 'full'
       }
     ]
   },
@@ -54,6 +54,11 @@ const routes: Routes = [
   {
     path: 'qrcode',
     redirectTo: '/tabs/qrcode',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    redirectTo: '/tabs/home',
     pathMatch: 'full'
   },
   {
@@ -70,12 +75,7 @@ const routes: Routes = [
     path: 'notifications',
     redirectTo: '/tabs/notifications',
     pathMatch: 'full'
-  },
-  {
-    path: 'home',
-    redirectTo: '/tabs/home',
-    pathMatch: 'full'
-  },
+  }
 ];
 
 @NgModule({
