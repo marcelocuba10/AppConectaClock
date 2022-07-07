@@ -18,17 +18,16 @@ export class UpdateMachineModalComponent implements OnInit {
 
   //receive data from qrcode page
   @Input() codeQR: string;
+  @Input() machine: Machine;
 
   user: User;
-  machine: Machine;
-  //toggleValueStatus: boolean = true;
 
   constructor(
     private modalCtrl: ModalController,
     private appService: AppService,
     private apiService: ApiService,
     private authService: AuthService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     //get User
@@ -38,36 +37,12 @@ export class UpdateMachineModalComponent implements OnInit {
         console.log(user);
       }
     );
-    this.getMachineByQRcode(this.codeQR);
   }
 
   dismissModal() {
     this.modalCtrl.dismiss({
       'dismissed': true
     });
-  }
-
-  async getMachineByQRcode(codeQR: string) {
-
-    this.appService.presentLoading(1);
-    await this.apiService.getMachineByQRcode(codeQR).subscribe(response => {
-      if (response == null) {
-        this.appService.presentLoading(0);
-        this.appService.presentAlert('Codigo QR no registrado');
-      } else {
-        this.machine = response;
-        // //toggle status
-        // if (this.machine.status == "Encendido") {
-        //   this.toggleValueStatus = true;
-        // }
-        // if (this.machine.status == "Apagado") {
-        //   this.toggleValueStatus = false;
-        // }
-
-        this.appService.presentLoading(0);
-      }
-    });
-
   }
 
   async updateMachine(form: NgForm) {

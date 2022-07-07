@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import {AuthGuard} from './guard/auth.guard';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -9,44 +9,45 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),
-    canActivate:[AuthGuard]
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'main',
-    loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule),
-    canActivate:[AuthGuard]
+    loadChildren: () => import('./pages/main/main.module').then(m => m.MainPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'landing',
-    loadChildren: () => import('./pages/landing/landing.module').then( m => m.LandingPageModule)
+    loadChildren: () => import('./pages/landing/landing.module').then(m => m.LandingPageModule)
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/auth/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/auth/login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'register',
-    loadChildren: () => import('./pages/auth/register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./pages/auth/register/register.module').then(m => m.RegisterPageModule)
   },
   {
     path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
-    canActivate:[AuthGuard]
+    loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'reports',
-    loadChildren: () => import('./pages/report/report.module').then( m => m.ReportPageModule),
-    canActivate:[AuthGuard]
+    loadChildren: () => import('./pages/report/report.module').then(m => m.ReportPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'notification',
-    loadChildren: () => import('./pages/notification/notification.module').then( m => m.NotificationPageModule),
-    canActivate:[AuthGuard]
+    loadChildren: () => import('./pages/notification/notification.module').then(m => m.NotificationPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'qrcode',
-    loadChildren: () => import('./pages/qrcode/qrcode.module').then( m => m.QrcodePageModule)
+    loadChildren: () => import('./pages/qrcode/qrcode.module').then(m => m.QrcodePageModule),
+    canActivate: [AuthGuard]
   }
 
 ];
@@ -56,4 +57,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
