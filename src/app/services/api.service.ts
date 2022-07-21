@@ -10,8 +10,8 @@ import { Schedule } from '../models/schedule';
 })
 export class ApiService {
 
-  API_URL = 'https://conectaclock.badrobotspy.com/api/';
-  //API_URL = 'http://127.0.0.1:8000/api/';
+  //API_URL = 'https://conectaclock.badrobotspy.com/api/';
+  API_URL = 'http://127.0.0.1:8000/api/';
 
   httpHeader = {
     headers: new HttpHeaders({
@@ -32,7 +32,9 @@ export class ApiService {
     return throwError(errorMessage);
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+    ) {}
 
   /*** Handle API errors ***/
   handleError(error: HttpErrorResponse) {
@@ -47,6 +49,7 @@ export class ApiService {
       'Something bad happened; please try again later.');
   };
 
+
   /*** schedules ***/
   public getSchedules(): Observable<Schedule[]> {
     return this.http.get<Schedule[]>(this.API_URL + 'schedules', this.httpHeader);
@@ -59,7 +62,7 @@ export class ApiService {
       )
   }
 
-  public verifySchedule(id: number): Observable<Schedule> {
+  public checkSchedule(id: number): Observable<Schedule> {
     return this.http.get<Schedule>(this.API_URL + 'schedule/user/check/' + id, this.httpHeader)
       .pipe(
         catchError(this.errorHandler)

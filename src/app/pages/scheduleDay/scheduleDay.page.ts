@@ -54,6 +54,10 @@ export class scheduleDayPage implements OnInit {
 
   async ngOnInit() {
     console.log("load ngOnInit");
+    this.getCurrentUser();
+  }
+
+  public getCurrentUser(){
     this.authService.getUser().subscribe(
       user => {
         this.user = user;
@@ -64,8 +68,7 @@ export class scheduleDayPage implements OnInit {
 
   ionViewWillEnter() {
     console.log("load ionViewWillEnter");
-    console.log(this.tab.user.id);
-    this.CheckSchedule();
+    //this.CheckSchedule();
     this.getCurrentLocation();
   }
 
@@ -92,9 +95,11 @@ export class scheduleDayPage implements OnInit {
 
   CheckSchedule() {
     console.log("load checkSchedule");
+
     try {
       //this.appService.presentLoading(1);
-      this.apiService.verifySchedule(this.tab.user.id).subscribe((data: Schedule) => {
+      this.apiService.checkSchedule(this.tab.user.id).subscribe((data: Schedule) => {
+        
         if (Object.keys(data).length === 0) {
           //if return 0 is because it does not have registers
           this.btnCheckOut = true; //disable button CheckOut
