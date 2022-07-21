@@ -8,13 +8,13 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
+    path: 'main',
+    loadChildren: () => import('./pages/main/main.module').then(m => m.MainPageModule),
     canActivate: [AuthGuard]
   },
   {
-    path: 'main',
-    loadChildren: () => import('./pages/main/main.module').then(m => m.MainPageModule),
+    path: 'scheduleDay',
+    loadChildren: () => import('./pages/scheduleDay/scheduleDay.module').then(m => m.scheduleDayPageModule),
     canActivate: [AuthGuard]
   },
   {
@@ -35,8 +35,8 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'reports',
-    loadChildren: () => import('./pages/report/report.module').then(m => m.ReportPageModule),
+    path: 'schedules',
+    loadChildren: () => import('./pages/schedule/schedule.module').then(m => m.SchedulePageModule),
     canActivate: [AuthGuard]
   },
   {

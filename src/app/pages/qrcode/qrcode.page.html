@@ -1,9 +1,3 @@
-<ion-toolbar>
-  <ion-buttons slot="start">
-    <ion-menu-button class="icon-menu btn-hamburguer"></ion-menu-button>
-  </ion-buttons>
-</ion-toolbar>
-
 <ion-content [fullscreen]="true" [style.--background]="scanActive?'#00000000':'#ffffff'">
 
   <ion-grid style="border-radius: 20px;" [hidden]="scanActive">
@@ -34,7 +28,7 @@
 
   <ion-row class="scan-button" [hidden]="!scanActive" style="text-align: center;">
     <ion-col class="ion-no-padding">
-      <ion-button mode="ios" size="large" shape="round" color="tertiary" (click)="stopScanner()">Stop</ion-button>
+      <ion-button mode="ios" size="large" shape="round" color="tertiary" (click)="stopScanner()">STOP</ion-button>
     </ion-col>
   </ion-row>
 

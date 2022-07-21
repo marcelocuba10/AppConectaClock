@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Report } from '../models/report';
 import { Machine } from '../models/machine';
+import { Schedule } from '../models/schedule';
 
 @Injectable({
   providedIn: 'root'
@@ -47,35 +47,35 @@ export class ApiService {
       'Something bad happened; please try again later.');
   };
 
-  /*** reports ***/
-  public getReports(): Observable<Report[]> {
-    return this.http.get<Report[]>(this.API_URL + 'reports', this.httpHeader);
+  /*** schedules ***/
+  public getSchedules(): Observable<Schedule[]> {
+    return this.http.get<Schedule[]>(this.API_URL + 'schedules', this.httpHeader);
   }
 
-  public getReportsByUser(id: number): Observable<Report> {
-    return this.http.get<Report>(this.API_URL + 'report/user/' + id, this.httpHeader)
+  public getSchedulesByUser(id: number): Observable<Schedule> {
+    return this.http.get<Schedule>(this.API_URL + 'schedule/user/' + id, this.httpHeader)
       .pipe(
         catchError(this.errorHandler)
       )
   }
 
-  public verifyReport(id: number): Observable<Report> {
-    return this.http.get<Report>(this.API_URL + 'report/user/check/' + id, this.httpHeader)
+  public verifySchedule(id: number): Observable<Schedule> {
+    return this.http.get<Schedule>(this.API_URL + 'schedule/user/check/' + id, this.httpHeader)
       .pipe(
         catchError(this.errorHandler)
       )
   }
 
-  public addReport(report: Report): Observable<Report> {
-    return this.http.post<Report>(this.API_URL + 'report', report, this.httpHeader);
+  public addSchedule(schedule: Schedule): Observable<Schedule> {
+    return this.http.post<Schedule>(this.API_URL + 'schedule', schedule, this.httpHeader);
   }
 
-  public updateReport(reportId: number, report: Report): Observable<Report> {
-    return this.http.put<Report>(this.API_URL + 'report/' + reportId, report, this.httpHeader);
+  public updateSchedule(scheduleId: number, schedule: Schedule): Observable<Schedule> {
+    return this.http.put<Schedule>(this.API_URL + 'schedule/' + scheduleId, schedule, this.httpHeader);
   }
 
-  public deleteReport(reportId: number): Observable<Report> {
-    return this.http.delete<Report>(this.API_URL + 'report/' + reportId, this.httpHeader);
+  public deleteSchedule(scheduleId: number): Observable<Schedule> {
+    return this.http.delete<Schedule>(this.API_URL + 'schedule/' + scheduleId, this.httpHeader);
   }
 
   /*** get notifications ***/

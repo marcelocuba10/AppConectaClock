@@ -2,58 +2,57 @@
   <ion-buttons slot="start">
     <ion-menu-button class="icon-menu btn-hamburguer"></ion-menu-button>
   </ion-buttons>
+  <ion-title class="ion-text-center"></ion-title>
 </ion-toolbar>
 
-<ion-content  [fullscreen]="true">
+<ion-content>
 
   <ion-grid style="border-radius: 20px">
     <ion-row>
       <ion-col>
         <ion-text color="secondary">
-          <h1 style="margin-left: 20px;text-align:center;color: #000;font-weight: 800;">
-            Funcionario
+          <h1 style="margin-left: 20px;font-family: system-ui;color: #000;font-weight: 800;">
+            ConectaCode
           </h1>
         </ion-text>
         <ion-text color="secondary">
-          <h3 style="text-align: center;color:#676767;" class="head-title-center" *ngIf="user != undefined">{{ user["name"] }} {{ user["last_name"] }}</h3>
+          <p style="color: #676767;margin-top: -7px;margin-left: 20px;">
+            Integrando Ideas
+          </p>
         </ion-text>
       </ion-col>
+      <ion-col style="text-align: center;">
+        <img style="width: 30%; margin-top: 20px" src="./assets/conectacode.png"/>
+      </ion-col>
     </ion-row>
   </ion-grid>
 
-  <ion-list style="margin-top: 80px;">
+  <ion-list>
+    <ion-card [routerLink]="['/qrcode']" class="card-sty">
+      <img style="height: 220px; width: 100%" src="./assets/qr-code.png"/>
+      <ion-card-header style="position: relative; margin-top: -99px">
+        <ion-grid style="border-radius: 20px">
+          <ion-row>
+            <ion-col>
+              <ion-badge style="float: right; font-size: 16px; padding: 8px" color="warning">Escanear Máquinas</ion-badge>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+    </ion-card>
 
-    <ion-item>
-      <ion-label>
-        <h3 style="color:#676767;font-size: 22px;text-align: center;font-weight: 700;">{{ day }}</h3>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>
-        <h3 style="font-size: 50px;text-align: center;font-weight: 700;">{{ time }}</h3>
-      </ion-label>
-    </ion-item>
-
+    <ion-card [routerLink]="['/main']" class="card-sty">
+      <img style="height: 220px; width: 100%" src="./assets/checkTime.png"/>
+      <ion-card-header style="position: relative; margin-top: -99px">
+        <ion-grid style="border-radius: 20px">
+          <ion-row>
+            <ion-col>
+              <ion-badge style="float: right; font-size: 16px; padding: 8px" color="tertiary">Marcar Asistencia</ion-badge>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+    </ion-card>
   </ion-list>
-
-  <ion-grid style="border-radius: 20px;margin-top: 55px;">
-    <ion-row style="text-align: center;">
-      <ion-col>
-        <ion-button (click)="addCheckInTime()" mode="ios" size="large" shape="round" color="success" [disabled]="btnCheckIn">Marcar Entrada</ion-button>
-      </ion-col>
-    </ion-row>
-    <ion-row style="text-align: center;">
-      <ion-col>
-        <ion-button (click)="addCheckOutTime()" mode="ios" size="large" shape="round" color="warning" [disabled]="btnCheckOut">Marcar Salida</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <div style="text-align: center;color: #676767;">
-    <ion-text>
-      <p>{{ latitude }}</p>
-      <p>{{ longitude }}</p>
-    </ion-text>
-  </div>
 
 </ion-content>

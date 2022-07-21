@@ -21,23 +21,23 @@
   </ion-grid>
 
   <ion-list>
-    <ion-card *ngFor="let report of reports" class="card-st">
+    <ion-card *ngFor="let schedule of schedules" class="card-st">
       <ion-card-header style="padding-bottom: 2px;">
-        <ion-card-title style="text-decoration: underline;font-weight: bold;color: #000;font-size: 20px;">{{ report.date }}
+        <ion-card-title style="text-decoration: underline;font-weight: bold;color: #000;font-size: 20px;">{{ schedule.date }}
         </ion-card-title>
         <ion-grid>
           <ion-row style="margin-left: -10px;">
             <ion-col size="6">
               <ion-text color="secondary">
                 <ion-card-subtitle>
-                  Hora de entrada:<br> {{ report.check_in_time }}</ion-card-subtitle>
+                  Hora de entrada:<br> {{ schedule.check_in_time }}</ion-card-subtitle>
               </ion-text>
             </ion-col>
             <ion-col size="6">
-              <ion-text color="secondary" *ngIf="report.check_out_time">
-                <ion-card-subtitle>Hora de salida:<br> {{ report.check_out_time }}</ion-card-subtitle>
+              <ion-text color="secondary" *ngIf="schedule.check_out_time">
+                <ion-card-subtitle>Hora de salida:<br> {{ schedule.check_out_time }}</ion-card-subtitle>
               </ion-text>
-              <ion-text color="secondary" *ngIf="!report.check_out_time">
+              <ion-text color="secondary" *ngIf="!schedule.check_out_time">
                 <ion-card-subtitle>Hora de salida: <br>Pendiente</ion-card-subtitle>
               </ion-text>
             </ion-col>
@@ -48,7 +48,7 @@
   </ion-list>
 
   <!-- Skeleton screen -->
-  <div *ngIf="!reports">
+  <div *ngIf="!schedules">
     <ion-list>
       <ion-list-header>
         <ion-label>

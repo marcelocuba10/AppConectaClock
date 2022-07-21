@@ -10,12 +10,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/tabs/home',
+        redirectTo: '/tabs/main',
         pathMatch: 'full'
       },
       {
         path: '/',
-        redirectTo: '/tabs/home',
+        redirectTo: '/tabs/main',
         pathMatch: 'full'
       },
       {
@@ -24,8 +24,8 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'reports',
-        loadChildren: () => import('../pages/report/report.module').then(m => m.ReportPageModule),
+        path: 'schedules',
+        loadChildren: () => import('../pages/schedule/schedule.module').then(m => m.SchedulePageModule),
         canActivate: [AuthGuard]
       },
       {
@@ -34,13 +34,13 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'home',
-        loadChildren: () => import('../pages/home/home.module').then(m => m.HomePageModule),
+        path: 'main',
+        loadChildren: () => import('../pages/main/main.module').then(m => m.MainPageModule),
         canActivate: [AuthGuard]
       },
       {
-        path: 'main',
-        loadChildren: () => import('../pages/main/main.module').then(m => m.MainPageModule),
+        path: 'scheduleDay',
+        loadChildren: () => import('../pages/scheduleDay/scheduleDay.module').then(m => m.scheduleDayPageModule),
         canActivate: [AuthGuard]
       },
       {
@@ -62,18 +62,18 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'home',
-    redirectTo: '/tabs/home',
-    pathMatch: 'full'
-  },
-  {
     path: 'main',
     redirectTo: '/tabs/main',
     pathMatch: 'full'
   },
   {
-    path: 'reports',
-    redirectTo: '/tabs/reports',
+    path: 'scheduleDay',
+    redirectTo: '/tabs/scheduleDay',
+    pathMatch: 'full'
+  },
+  {
+    path: 'schedules',
+    redirectTo: '/tabs/schedules',
     pathMatch: 'full'
   },
   {
