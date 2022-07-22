@@ -48,7 +48,7 @@ export class scheduleDayPage implements OnInit {
     console.log("load constructor");
     this.startTime();
     this.menu.enable(true);
-    this.CheckSchedule();
+    //this.CheckSchedule();
     this.getCurrentLocation();
   }
 
@@ -68,29 +68,8 @@ export class scheduleDayPage implements OnInit {
 
   ionViewWillEnter() {
     console.log("load ionViewWillEnter");
-    //this.CheckSchedule();
+    this.CheckSchedule();
     this.getCurrentLocation();
-  }
-
-  async getCurrentLocation(){
-
-    await Geolocation.getCurrentPosition({enableHighAccuracy: true,maximumAge: 0,timeout: 5000,})
-    .then((resp) => {
-      this.latitude= resp.coords.latitude,
-      this.longitude= resp.coords.longitude,
-      console.log('Current position:', resp.coords);
-     }).catch((error) => {
-      this.appService.presentToast('Error getting location');
-      console.log('Error getting location', error);
-     });
-  }
-
-  startTime() {
-    var intervalVar = setInterval(function () {
-      this.time = moment().format('LTS'); //show only time
-    }.bind(this), 500);
-
-    this.day = moment().locale('es').format('LL');
   }
 
   CheckSchedule() {
@@ -128,6 +107,27 @@ export class scheduleDayPage implements OnInit {
       this.appService.presentAlert(error);
     }
 
+  }
+
+  async getCurrentLocation(){
+
+    await Geolocation.getCurrentPosition({enableHighAccuracy: true,maximumAge: 0,timeout: 5000,})
+    .then((resp) => {
+      this.latitude= resp.coords.latitude,
+      this.longitude= resp.coords.longitude,
+      console.log('Current position:', resp.coords);
+     }).catch((error) => {
+      this.appService.presentToast('Error getting location');
+      console.log('Error getting location', error);
+     });
+  }
+
+  startTime() {
+    var intervalVar = setInterval(function () {
+      this.time = moment().format('LTS'); //show only time
+    }.bind(this), 500);
+
+    this.day = moment().locale('es').format('LL');
   }
 
   public addCheckInTime() {

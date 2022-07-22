@@ -11,6 +11,7 @@
     <!-- Barcode -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
+    <uses-feature android:name="android.hardware.camera" />
     
     <application
         android:hardwareAccelerated="true"
