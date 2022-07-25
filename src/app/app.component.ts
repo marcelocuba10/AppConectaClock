@@ -20,6 +20,9 @@ export class AppComponent {
   }
 
   initializeApp() {
+
+    console.log('initializeApp')
+
     this.platform.ready().then(() => {
       // Commenting splashScreen Hide, so it won't hide splashScreen before auth check
       //this.splashScreen.hide();

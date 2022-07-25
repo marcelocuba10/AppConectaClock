@@ -63,6 +63,7 @@ export class ApiService {
   }
 
   public checkSchedule(id: number): Observable<Schedule> {
+    console.log(this.API_URL + 'schedule/user/check/' + id);
     return this.http.get<Schedule>(this.API_URL + 'schedule/user/check/' + id, this.httpHeader)
       .pipe(
         catchError(this.errorHandler)

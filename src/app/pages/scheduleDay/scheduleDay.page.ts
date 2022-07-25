@@ -55,6 +55,7 @@ export class scheduleDayPage implements OnInit {
   async ngOnInit() {
     console.log("load ngOnInit");
     this.getCurrentUser();
+    this.CheckSchedule();
   }
 
   public getCurrentUser(){
@@ -77,32 +78,63 @@ export class scheduleDayPage implements OnInit {
 
     try {
       //this.appService.presentLoading(1);
-      this.apiService.checkSchedule(this.tab.user.id).subscribe((data: Schedule) => {
+      if (this.tab.user) {
+        this.apiService.checkSchedule(this.tab.user.id).subscribe((data: Schedule) => {
         
-        if (Object.keys(data).length === 0) {
-          //if return 0 is because it does not have registers
-          this.btnCheckOut = true; //disable button CheckOut
-          this.btnCheckIn = false; //enable button CheckIn
-
-        } else {
-          this.scheduleIdDay = data[0]['id'];//get id schedule of current day
-
-          if (data[0]['check_in_time']) {
-            //entry time already checkIn
-            console.log('check-in ok');
-            this.btnCheckOut = false; //enable button CheckOut
-            this.btnCheckIn = true; //disable button CheckIn
-          }
-
-          if (data[0]['check_in_time'] && data[0]['check_out_time']) {
-            //all time already check
-            console.log('check-in and check-out ok');
+          if (Object.keys(data).length === 0) {
+            //if return 0 is because it does not have registers
+            this.appService.presentLoading(0);
             this.btnCheckOut = true; //disable button CheckOut
-            this.btnCheckIn = true; //disable button CheckIn
+            this.btnCheckIn = false; //enable button CheckIn
+  
+          } else {
+            this.scheduleIdDay = data[0]['id'];//get id schedule of current day
+  
+            if (data[0]['check_in_time']) {
+              //entry time already checkIn
+              console.log('check-in ok');
+              this.btnCheckOut = false; //enable button CheckOut
+              this.btnCheckIn = true; //disable button CheckIn
+            }
+  
+            if (data[0]['check_in_time'] && data[0]['check_out_time']) {
+              //all time already check
+              console.log('check-in and check-out ok');
+              this.btnCheckOut = true; //disable button CheckOut
+              this.btnCheckIn = true; //disable button CheckIn
+            }
+            //this.appService.presentLoading(0);
           }
-        }
-        //this.appService.presentLoading(0);
-      });
+        });
+      }else{
+        this.apiService.checkSchedule(this.user.id).subscribe((data: Schedule) => {
+        
+          if (Object.keys(data).length === 0) {
+            //if return 0 is because it does not have registers
+            this.appService.presentLoading(0);
+            this.btnCheckOut = true; //disable button CheckOut
+            this.btnCheckIn = false; //enable button CheckIn
+  
+          } else {
+            this.scheduleIdDay = data[0]['id'];//get id schedule of current day
+  
+            if (data[0]['check_in_time']) {
+              //entry time already checkIn
+              console.log('check-in ok');
+              this.btnCheckOut = false; //enable button CheckOut
+              this.btnCheckIn = true; //disable button CheckIn
+            }
+  
+            if (data[0]['check_in_time'] && data[0]['check_out_time']) {
+              //all time already check
+              console.log('check-in and check-out ok');
+              this.btnCheckOut = true; //disable button CheckOut
+              this.btnCheckIn = true; //disable button CheckIn
+            }
+            this.appService.presentLoading(0);
+          }
+        });
+      }
     } catch (error) {
       this.appService.presentAlert(error);
     }
@@ -117,7 +149,7 @@ export class scheduleDayPage implements OnInit {
       this.longitude= resp.coords.longitude,
       console.log('Current position:', resp.coords);
      }).catch((error) => {
-      this.appService.presentToast('Error getting location');
+      //this.appService.presentToast('Error getting location');
       console.log('Error getting location', error);
      });
   }
