@@ -42,6 +42,8 @@ export class LoginPage implements OnInit {
   //login 
   async login(form: NgForm) {
     this.appService.presentLoading(1);
+    form.value.email = "user@user.com";
+    form.value.password = "teste123";
     await this.authService.login(form.value.email, form.value.password).subscribe(
       data => {
         //this.appService.presentToast('Logged In');

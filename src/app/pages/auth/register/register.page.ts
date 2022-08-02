@@ -39,8 +39,9 @@ export class RegisterPage implements OnInit {
   //register
   async register(form: NgForm) {
     this.appService.presentLoading(1);
-    await this.authService.register(form.value.first_name, form.value.phone, form.value.email, form.value.password).subscribe(
+    await this.authService.register(form.value.name, form.value.email, form.value.password).subscribe(
       data => {
+        console.log('register inside');
         this.authService.login(form.value.email, form.value.password).subscribe(
           () => {
           },

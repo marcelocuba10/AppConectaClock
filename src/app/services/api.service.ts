@@ -15,10 +15,10 @@ export class ApiService {
 
   httpHeader = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json, application/x-www-form-urlencoded; charset=UTF-8',
       'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, GET, PUT, OPTIONS, DELETE, PATCH',
-      'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With',
+      'Access-Control-Allow-Methods': '*',
+      'Access-Control-Allow-Headers': 'Origin, Accept, Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With',
     })
   };
 

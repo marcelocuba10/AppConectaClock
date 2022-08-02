@@ -21,9 +21,9 @@ export class AuthService {
     private env: ApiService,
   ) { }
 
-   getUser() {
+  getUser() {
     const headers = new HttpHeaders({ 'Authorization': this.token["token_type"] + " " + this.token["access_token"] });
-    return  this.http.get<User>(this.env.API_URL + 'auth/user', { headers: headers })
+    return this.http.get<User>(this.env.API_URL + 'auth/user', { headers: headers })
       .pipe(
         tap(user => user)
       );
@@ -46,13 +46,14 @@ export class AuthService {
     );
   }
 
-  register(first_name: string, phone: string, email: string, password: string) {
+  register(name: string, email: string, password: string) {
     //const role = "customer";
-    return this.http.post(this.env.API_URL + 'auth/register', { first_name, phone, email, password });
+    console.log('auth register');
+    return this.http.put(this.env.API_URL + 'auth/register', { name, email, password });
   }
 
-  updateUserProfile(first_name: string, last_name: string, phone: string, address: string, email: string, password: string) {
-    return this.http.post(this.env.API_URL + 'auth/update', { first_name, last_name, address, phone, email, password });
+  updateUserProfile(name: string, last_name: string, phone: string, address: string, email: string, password: string) {
+    return this.http.post(this.env.API_URL + 'auth/update', { name, last_name, address, phone, email, password });
   }
 
   logout() {

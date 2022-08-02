@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController, ModalController, NavController } from '@ionic/angular';
+import { AppService } from 'src/app/services/app.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginPage } from '../auth/login/login.page';
 import { RegisterPage } from '../auth/register/register.page';
@@ -15,6 +16,7 @@ export class LandingPage implements OnInit {
     private modalController: ModalController,
     private menu: MenuController,
     private authService: AuthService,
+    private appService:AppService,
     private navCtrl: NavController,
   ) {
     this.menu.enable(false);
