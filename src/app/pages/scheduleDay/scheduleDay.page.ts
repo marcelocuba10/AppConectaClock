@@ -27,8 +27,8 @@ export class scheduleDayPage implements OnInit {
   public user: User;
   public scheduleIdDay;
 
-  public btnCheckIn = true;
-  public btnCheckOut = true;
+  public btnCheckIn = true; //is disabled?
+  public btnCheckOut = true; //is disabled?
 
   public time;
   public day;
@@ -48,7 +48,7 @@ export class scheduleDayPage implements OnInit {
     console.log("load constructor");
     this.startTime();
     this.menu.enable(true);
-    //this.CheckSchedule();
+    this.getCurrentUser();
     this.getCurrentLocation();
   }
 
@@ -58,7 +58,8 @@ export class scheduleDayPage implements OnInit {
     this.CheckSchedule();
   }
 
-  public getCurrentUser(){
+  public getCurrentUser() {
+    console.log("load getCurrentUser");
     this.authService.getUser().subscribe(
       user => {
         this.user = user;
@@ -77,81 +78,51 @@ export class scheduleDayPage implements OnInit {
     console.log("load checkSchedule");
 
     try {
-      //this.appService.presentLoading(1);
-      if (this.tab.user) {
-        this.apiService.checkSchedule(this.tab.user.id).subscribe((data: Schedule) => {
-        
-          if (Object.keys(data).length === 0) {
-            //if return 0 is because it does not have registers
-            this.appService.presentLoading(0);
-            this.btnCheckOut = true; //disable button CheckOut
-            this.btnCheckIn = false; //enable button CheckIn
-  
-          } else {
-            this.scheduleIdDay = data[0]['id'];//get id schedule of current day
-  
-            if (data[0]['check_in_time']) {
-              //entry time already checkIn
-              console.log('check-in ok');
-              this.btnCheckOut = false; //enable button CheckOut
-              this.btnCheckIn = true; //disable button CheckIn
-            }
-  
-            if (data[0]['check_in_time'] && data[0]['check_out_time']) {
-              //all time already check
-              console.log('check-in and check-out ok');
-              this.btnCheckOut = true; //disable button CheckOut
-              this.btnCheckIn = true; //disable button CheckIn
-            }
-            //this.appService.presentLoading(0);
+      this.appService.presentLoading(1);
+      this.apiService.checkSchedule(this.tab.user.id).subscribe((data: Schedule) => {
+
+        if (Object.keys(data).length === 0) {
+          //if return 0 is because it does not have registers
+          this.appService.presentLoading(0);
+          this.btnCheckOut = true; //is disabled?
+          this.btnCheckIn = false; //is disabled?
+
+        } else {
+          this.scheduleIdDay = data[0]['id'];//get id schedule of current day
+
+          if (data[0]['check_in_time']) {
+            //entry time already checkIn
+            console.log('check-in ok');
+            this.btnCheckOut = false; //is disabled?
+            this.btnCheckIn = true; //is disabled?
           }
-        });
-      }else{
-        this.apiService.checkSchedule(this.user.id).subscribe((data: Schedule) => {
-        
-          if (Object.keys(data).length === 0) {
-            //if return 0 is because it does not have registers
-            this.appService.presentLoading(0);
-            this.btnCheckOut = true; //disable button CheckOut
-            this.btnCheckIn = false; //enable button CheckIn
-  
-          } else {
-            this.scheduleIdDay = data[0]['id'];//get id schedule of current day
-  
-            if (data[0]['check_in_time']) {
-              //entry time already checkIn
-              console.log('check-in ok');
-              this.btnCheckOut = false; //enable button CheckOut
-              this.btnCheckIn = true; //disable button CheckIn
-            }
-  
-            if (data[0]['check_in_time'] && data[0]['check_out_time']) {
-              //all time already check
-              console.log('check-in and check-out ok');
-              this.btnCheckOut = true; //disable button CheckOut
-              this.btnCheckIn = true; //disable button CheckIn
-            }
-            this.appService.presentLoading(0);
+
+          if (data[0]['check_in_time'] && data[0]['check_out_time']) {
+            //all time already check
+            console.log('check-in and check-out ok');
+            this.btnCheckOut = true; //is disabled?
+            this.btnCheckIn = true; //is disabled?
           }
-        });
-      }
+          this.appService.presentLoading(0);
+        }
+      });
     } catch (error) {
       this.appService.presentAlert(error);
     }
 
   }
 
-  async getCurrentLocation(){
+  async getCurrentLocation() {
 
-    await Geolocation.getCurrentPosition({enableHighAccuracy: true,maximumAge: 0,timeout: 5000,})
-    .then((resp) => {
-      this.latitude= resp.coords.latitude,
-      this.longitude= resp.coords.longitude,
-      console.log('Current position:', resp.coords);
-     }).catch((error) => {
-      //this.appService.presentToast('Error getting location');
-      console.log('Error getting location', error);
-     });
+    await Geolocation.getCurrentPosition({ enableHighAccuracy: true, maximumAge: 0, timeout: 5000, })
+      .then((resp) => {
+        this.latitude = resp.coords.latitude,
+          this.longitude = resp.coords.longitude
+        // console.log('Current position:', resp.coords);
+      }).catch((error) => {
+        //this.appService.presentToast('Error getting location');
+        console.log('Error getting location', error);
+      });
   }
 
   startTime() {
@@ -164,14 +135,14 @@ export class scheduleDayPage implements OnInit {
 
   public addCheckInTime() {
     this.appService.presentLoading(1);
-    //block button 'Marcar Entrada'
-    this.btnCheckIn = true;
-    this.btnCheckOut = false;
+
+    this.btnCheckIn = true; //is disabled?
+    this.btnCheckOut = false; //is disabled?
     let response: Observable<Schedule>;
 
     //convert date and save
     const dateTem = new Date();
-    this.schedule.date = this.datepipe.transform(dateTem, 'd-MM-yyyy');
+    this.schedule.date = this.datepipe.transform(dateTem, 'dd-MM-yyyy');
     this.schedule.check_in_time = this.time;
     this.schedule.check_out_time = null;
     this.schedule.user_id = this.user.id;
@@ -188,13 +159,14 @@ export class scheduleDayPage implements OnInit {
 
   public addCheckOutTime() {
     this.appService.presentLoading(1);
-    //block button 'Marcar Salida'
-    this.btnCheckOut = true;
+
+    this.btnCheckIn = true; //is disabled?
+    this.btnCheckOut = true; //is disabled?
     let response: Observable<Schedule>;
 
     //convert date and save
     const dateTem = new Date();
-    this.schedule.date = this.datepipe.transform(dateTem, 'd-MM-yyyy');
+    this.schedule.date = this.datepipe.transform(dateTem, 'dd-MM-yyyy');
     this.schedule.check_out_time = this.time;
     this.schedule.user_id = this.user.id;
     this.schedule.address_latitude_out = this.latitude;
