@@ -43,9 +43,14 @@ export class QrcodePage implements OnInit {
 
       if (result.hasContent) {
         this.scanActive = false;
-        //Handle the data as your heart desires here
         this.QRresult = result.content;
-        this.getMachineByQRcode(this.QRresult);
+
+        //if qrcode have 8 characters, is machine qrcode; else any character or link
+        if (this.QRresult.length === 8) {
+          this.getMachineByQRcode(this.QRresult);
+        } else {
+          this.appService.presentAlert(this.QRresult);
+        }
       } else {
         this.appService.presentAlert('No data found!');
       }
@@ -59,7 +64,7 @@ export class QrcodePage implements OnInit {
     this.apiService.getMachineByQRcode(QRresult).subscribe(response => {
       if (response == null || Object.keys(response).length === 0) {
         this.appService.presentLoading(0);
-        this.appService.presentAlert('Codigo QR no registrado');
+        this.appService.presentAlert('Codigo QR no registrado en el sistema');
       } else {
         this.appService.presentLoading(0);
         this.machine = response;
